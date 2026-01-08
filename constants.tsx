@@ -4,7 +4,7 @@ import { SitemapItem, Session, Persona, NavigationTab } from './types';
 export const SITEMAP_DATA: SitemapItem[] = [
   {
     level1: 'Home',
-    purpose: 'Primary entry point and brand mission',
+    purpose: 'Entry point and brand mission',
     contentType: 'Page',
     status: 'Live',
     owner: 'Brand Marketing',
@@ -93,6 +93,60 @@ export const SITEMAP_DATA: SitemapItem[] = [
       { level2: 'Sponsors', level3: 'Become a Sponsor', contentType: 'Page', status: 'Live' },
       { level2: 'Sponsors', level3: 'Sponsor Tiers', contentType: 'Collection', status: 'Live' },
       { level2: 'Sponsors', level3: 'Sponsor Directory', contentType: 'Profiles', status: 'In Review' },
+    ]
+  },
+  {
+    level1: 'Venue & Travel',
+    purpose: 'Logistics and location details',
+    contentType: 'Pages',
+    status: 'Approved',
+    owner: 'Travel & Logistics',
+    subItems: [
+      { level2: 'Venue', level3: 'Venue', contentType: 'Page', status: 'Live' },
+      { level2: 'Venue', level3: 'Hotels', contentType: 'Collection', status: 'Approved' },
+      { level2: 'Venue', level3: 'Travel Info', contentType: 'Page', status: 'Live' },
+      { level2: 'Venue', level3: 'Local Guide', contentType: 'Page', status: 'Draft' },
+      { level2: 'Venue', level3: 'Accessibility', contentType: 'Page', status: 'Live' },
+    ]
+  },
+  {
+    level1: 'About',
+    purpose: 'Conference governance and general info',
+    contentType: 'Pages',
+    status: 'Live',
+    owner: 'Public Relations',
+    subItems: [
+      { level2: 'About', level3: 'About TC', contentType: 'Page', status: 'Live' },
+      { level2: 'About', level3: 'FAQ', contentType: 'Page', status: 'Live' },
+      { level2: 'About', level3: 'Contact', contentType: 'Page', status: 'Live' },
+      { level2: 'About', level3: 'Code of Conduct', contentType: 'Static', status: 'Live' },
+      { level2: 'About', level3: 'Convince Your Boss', contentType: 'Page', status: 'Approved' },
+    ]
+  },
+  {
+    level1: 'Blog',
+    purpose: 'Updates & stories',
+    contentType: 'Articles',
+    status: 'Live',
+    owner: 'Editorial Team',
+  },
+  {
+    level1: 'Register',
+    purpose: 'Conversion and ticketing',
+    contentType: 'Transactional',
+    status: 'Live',
+    owner: 'Registration Systems',
+  },
+  {
+    level1: 'Legal',
+    purpose: 'Compliance and data protection',
+    contentType: 'Static',
+    status: 'Live',
+    owner: 'Legal Council',
+    subItems: [
+      { level2: 'Legal', level3: 'Privacy', contentType: 'Static', status: 'Live' },
+      { level2: 'Legal', level3: 'Cookies', contentType: 'Static', status: 'Live' },
+      { level2: 'Legal', level3: 'Terms', contentType: 'Static', status: 'Live' },
     ]
   }
 ];

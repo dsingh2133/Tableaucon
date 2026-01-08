@@ -1,9 +1,10 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-
 export const generateSessionIdeas = async (track: string) => {
+  // Always create a new GoogleGenAI instance right before making an API call 
+  // to ensure it uses the most up-to-date API key from the environment/context.
+  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
@@ -24,7 +25,8 @@ export const generateSessionIdeas = async (track: string) => {
         }
       }
     });
-    return JSON.parse(response.text);
+    // Extracting text from property .text as per guidelines
+    return JSON.parse(response.text || '[]');
   } catch (error) {
     console.error("Gemini Error:", error);
     return [];
