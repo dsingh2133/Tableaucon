@@ -43,9 +43,11 @@ export interface Speaker {
 }
 
 export enum NavigationTab {
-  OVERVIEW = 'Overview',
-  SITEMAP = 'Sitemap',
-  SESSIONS = 'Sessions',
-  ANALYTICS = 'Analytics',
-  GOVERNANCE = 'Governance'
+  HOME = 'Home',
+  PROGRAM = 'Program',
+  SPEAKERS = 'Speakers',
+  SPONSORS = 'Sponsors',
+  VENUE = 'Venue & Travel',
+  ABOUT = 'About',
+  TICKETS = 'Tickets'
 }

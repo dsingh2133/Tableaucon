@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { NavigationTab, Persona } from '../types';
 import { PERSONA_CONFIG, SITEMAP_DATA } from '../constants';
@@ -37,7 +36,8 @@ const Layout: React.FC<LayoutProps> = ({
             <div className="flex items-center space-x-2">
               <div 
                 className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-xl cursor-pointer hover:bg-blue-700 transition-colors shadow-sm" 
-                onClick={() => setActiveTab(NavigationTab.OVERVIEW)}
+                // Fix: NavigationTab.OVERVIEW does not exist, using NavigationTab.HOME
+                onClick={() => setActiveTab(NavigationTab.HOME)}
               >
                 T
               </div>
@@ -98,7 +98,8 @@ const Layout: React.FC<LayoutProps> = ({
                         <div 
                           key={i} 
                           className="px-4 py-3 hover:bg-slate-50 cursor-pointer border-b border-slate-50 last:border-0"
-                          onClick={() => { setActiveTab(NavigationTab.SITEMAP); setSearchOpen(false); }}
+                          // Fix: NavigationTab.SITEMAP does not exist, using NavigationTab.PROGRAM as it contains the main SitemapView logic
+                          onClick={() => { setActiveTab(NavigationTab.PROGRAM); setSearchOpen(false); }}
                         >
                           <p className="text-sm font-bold text-slate-800">{res.label}</p>
                           {res.parent && <p className="text-[10px] text-slate-400 uppercase font-black">{res.parent}</p>}
@@ -137,7 +138,8 @@ const Layout: React.FC<LayoutProps> = ({
       <div className="bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <div className="flex items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
-            <span className="hover:text-blue-600 cursor-pointer" onClick={() => setActiveTab(NavigationTab.OVERVIEW)}>IA HUB</span>
+            {/* Fix: NavigationTab.OVERVIEW does not exist, using NavigationTab.HOME */}
+            <span className="hover:text-blue-600 cursor-pointer" onClick={() => setActiveTab(NavigationTab.HOME)}>IA HUB</span>
             <span className="mx-2">/</span>
             <span className="text-slate-900">{activeTab}</span>
           </div>

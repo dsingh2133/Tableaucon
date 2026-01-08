@@ -57,7 +57,12 @@ const NodeCard: React.FC<{
               >
                 <div className="flex items-center gap-2">
                   <span className={`w-1.5 h-1.5 rounded-full ${getStatusColor(sub.status).split(' ')[0].replace('-100', '-500')}`} />
-                  <p className="text-xs font-bold text-slate-800">{sub.level3}</p>
+                  <div>
+                    <p className="text-xs font-bold text-slate-800">{sub.level3}</p>
+                    {sub.level2 !== item.level1 && (
+                       <p className="text-[8px] text-slate-400 uppercase font-bold tracking-tighter">{sub.level2}</p>
+                    )}
+                  </div>
                 </div>
                 <span className="text-[8px] font-black bg-slate-50 text-slate-400 px-1.5 py-0.5 rounded uppercase">{sub.contentType}</span>
               </div>
@@ -71,7 +76,7 @@ const NodeCard: React.FC<{
               </div>
               <p className="text-[9px] font-bold text-slate-600 truncate max-w-[120px]">{item.owner}</p>
             </div>
-            <button className="text-[9px] font-black text-blue-600 uppercase tracking-widest">Edit</button>
+            <button className="text-[9px] font-black text-blue-600 uppercase tracking-widest hover:underline">Edit</button>
           </div>
         </div>
       )}
@@ -112,23 +117,45 @@ const SitemapView: React.FC<SitemapViewProps> = ({ selectedPersona }) => {
 
   const isModuleRecommended = (label: string) => personaConfig.highlightedModules.includes(label);
 
-  const coreModules = filteredData.filter(i => ['Home', 'Program', 'Speakers', 'Learn', 'Community', 'Expo', 'Sponsors'].includes(i.level1));
-  const logisticsModules = filteredData.filter(i => !['Home', 'Program', 'Speakers', 'Learn', 'Community', 'Expo', 'Sponsors'].includes(i.level1));
+  const coreModules = filteredData.filter(i => ['Home', 'Program', 'Speakers', 'Sponsors', 'Register'].includes(i.level1));
+  const enablementModules = filteredData.filter(i => ['Learn', 'Community', 'Expo', 'Blog'].includes(i.level1));
+  const strategyModules = filteredData.filter(i => ['Venue & Travel', 'About', 'Legal'].includes(i.level1));
+
+  const Section = ({ title, items }: { title: string, items: SitemapItem[] }) => {
+    if (items.length === 0) return null;
+    return (
+      <div className="space-y-6 pt-8 first:pt-0">
+        <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">{title}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {items.map(item => (
+            <NodeCard 
+              key={item.level1} 
+              item={item} 
+              expanded={expanded}
+              toggleExpand={toggleExpand}
+              recommended={isModuleRecommended(item.level1)}
+              getStatusColor={getStatusColor}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 pb-6 border-b border-slate-200">
         <div className="space-y-1">
           <h2 className="text-3xl font-black text-slate-900 tracking-tighter">Information Architecture</h2>
-          <p className="text-slate-500 font-medium text-sm">Comprehensive sitemap inventory for TC24 digital hubs.</p>
+          <p className="text-slate-500 font-medium text-sm">Comprehensive sitemap inventory following the TC24 digital strategy.</p>
         </div>
         
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative">
              <input 
               type="text" 
-              placeholder="Search nodes..." 
-              className="pl-9 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:outline-none text-xs font-medium w-48 transition-all"
+              placeholder="Search architecture nodes..." 
+              className="pl-9 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:outline-none text-xs font-medium w-64 transition-all"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
              />
@@ -150,40 +177,10 @@ const SitemapView: React.FC<SitemapViewProps> = ({ selectedPersona }) => {
         </div>
       </div>
 
-      <div className="space-y-8">
-        <div>
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Core Conference Experience</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {coreModules.map(item => (
-              <NodeCard 
-                key={item.level1} 
-                item={item} 
-                expanded={expanded}
-                toggleExpand={toggleExpand}
-                recommended={isModuleRecommended(item.level1)}
-                getStatusColor={getStatusColor}
-              />
-            ))}
-          </div>
-        </div>
-
-        {logisticsModules.length > 0 && (
-          <div className="pt-8 border-t border-slate-100">
-            <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Logistics & Strategy</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {logisticsModules.map(item => (
-                <NodeCard 
-                  key={item.level1} 
-                  item={item} 
-                  expanded={expanded}
-                  toggleExpand={toggleExpand}
-                  recommended={isModuleRecommended(item.level1)}
-                  getStatusColor={getStatusColor}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+      <div className="space-y-12 divide-y divide-slate-100">
+        <Section title="Core Experience" items={coreModules} />
+        <Section title="Enablement & Community" items={enablementModules} />
+        <Section title="Strategy & Logistics" items={strategyModules} />
       </div>
 
       {filteredData.length === 0 && (

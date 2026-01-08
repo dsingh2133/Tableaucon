@@ -9,7 +9,7 @@ import { NavigationTab, Persona } from './types';
 import { PERSONA_CONFIG, MOCK_SESSIONS, SITEMAP_DATA } from './constants';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<NavigationTab>(NavigationTab.OVERVIEW);
+  const [activeTab, setActiveTab] = useState<NavigationTab>(NavigationTab.HOME);
   const [persona, setPersona] = useState<Persona>('General');
   const [showWelcome, setShowWelcome] = useState(false);
 
@@ -47,7 +47,7 @@ const App: React.FC = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case NavigationTab.OVERVIEW:
+      case NavigationTab.HOME:
         return (
           <div className="space-y-20 animate-in fade-in duration-700">
             {/* Dynamic Hero Section */}
@@ -72,16 +72,16 @@ const App: React.FC = () => {
                 
                 <div className="flex flex-col sm:flex-row justify-center gap-6">
                   <button 
-                    onClick={() => setActiveTab(NavigationTab.SITEMAP)}
+                    onClick={() => setActiveTab(NavigationTab.PROGRAM)}
                     className="bg-white text-blue-700 px-12 py-6 rounded-3xl font-black text-lg hover:bg-blue-50 transition-all shadow-[0_20px_50px_-10px_rgba(255,255,255,0.2)] hover:-translate-y-1 active:scale-95"
                   >
-                    View Sitemap
+                    Explore Program
                   </button>
                   <button 
-                    onClick={() => setActiveTab(personaConfig.priorityTab)}
+                    onClick={() => setActiveTab(NavigationTab.TICKETS)}
                     className="bg-blue-600 text-white px-12 py-6 rounded-3xl font-black text-lg hover:bg-blue-500 transition-all shadow-[0_20px_50px_-10px_rgba(37,99,235,0.3)] hover:-translate-y-1 active:scale-95"
                   >
-                    Go to {personaConfig.priorityTab}
+                    Register Now
                   </button>
                 </div>
               </div>
@@ -96,7 +96,7 @@ const App: React.FC = () => {
                     <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Recommended Content for {persona}</p>
                   </div>
                   <button 
-                    onClick={() => setActiveTab(NavigationTab.SESSIONS)} 
+                    onClick={() => setActiveTab(NavigationTab.PROGRAM)} 
                     className="text-xs font-black text-blue-600 uppercase tracking-widest hover:underline"
                   >
                     View Library &rarr;
@@ -152,7 +152,7 @@ const App: React.FC = () => {
                 </div>
 
                 <button 
-                  onClick={() => setActiveTab(NavigationTab.GOVERNANCE)}
+                  onClick={() => setActiveTab(NavigationTab.ABOUT)}
                   className="w-full py-5 rounded-2xl bg-slate-900 text-white text-sm font-black uppercase tracking-widest hover:bg-slate-800 transition-all mt-auto shadow-xl"
                 >
                   Policy Hub
@@ -161,16 +161,75 @@ const App: React.FC = () => {
             </section>
           </div>
         );
-      case NavigationTab.SITEMAP:
-        return <SitemapView selectedPersona={persona} />;
-      case NavigationTab.SESSIONS:
-        return <SessionLibrary initialPersona={persona} />;
-      case NavigationTab.ANALYTICS:
-        return <AnalyticsView />;
-      case NavigationTab.GOVERNANCE:
-        return <GovernanceView />;
+      case NavigationTab.PROGRAM:
+        return (
+          <div className="space-y-12">
+            <SessionLibrary initialPersona={persona} />
+            <div className="pt-12 border-t border-slate-200">
+               <h3 className="text-xl font-black text-slate-900 mb-6">Program IA Architecture</h3>
+               <SitemapView selectedPersona={persona} />
+            </div>
+          </div>
+        );
+      case NavigationTab.SPEAKERS:
+        return (
+          <div className="py-12">
+            <div className="max-w-4xl mx-auto text-center space-y-4 mb-12">
+              <h2 className="text-4xl font-black tracking-tighter">Speaker Intelligence Hub</h2>
+              <p className="text-slate-500 font-medium">Browse information architecture related to speaker discovery and alphabetical indices.</p>
+            </div>
+            <SitemapView selectedPersona={persona} />
+          </div>
+        );
+      case NavigationTab.SPONSORS:
+        return (
+          <div className="py-12">
+            <div className="max-w-4xl mx-auto text-center space-y-4 mb-12">
+              <h2 className="text-4xl font-black tracking-tighter">Sponsorship IA Blueprint</h2>
+              <p className="text-slate-500 font-medium">Mapping sponsor tiers, directories, and lead conversion points.</p>
+            </div>
+            <SitemapView selectedPersona={persona} />
+          </div>
+        );
+      case NavigationTab.VENUE:
+        return (
+          <div className="py-12">
+             <div className="max-w-4xl mx-auto text-center space-y-4 mb-12">
+              <h2 className="text-4xl font-black tracking-tighter">Logistics & Logistics Hub</h2>
+              <p className="text-slate-500 font-medium">Architecture for hotels, travel info, and local guides.</p>
+            </div>
+            <SitemapView selectedPersona={persona} />
+          </div>
+        );
+      case NavigationTab.ABOUT:
+        return (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+             <div className="lg:col-span-2">
+               <GovernanceView />
+             </div>
+             <div>
+               <h3 className="text-xl font-black mb-6">Related IA Nodes</h3>
+               <SitemapView selectedPersona={persona} />
+             </div>
+          </div>
+        );
+      case NavigationTab.TICKETS:
+        return (
+           <div className="py-24 text-center space-y-8">
+              <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto text-blue-600">
+                 <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                 </svg>
+              </div>
+              <div className="space-y-4">
+                <h2 className="text-4xl font-black tracking-tighter">Ticketing & Registration</h2>
+                <p className="text-slate-500 max-w-lg mx-auto font-medium leading-relaxed">The transactional architecture for ticket types, add-on management, and confirmation workflows.</p>
+              </div>
+              <SitemapView selectedPersona={persona} />
+           </div>
+        );
       default:
-        return <div className="text-center py-20 text-slate-400">Content Coming Soon</div>;
+        return <div className="text-center py-20 text-slate-400 font-bold uppercase tracking-widest">Architectural Node Coming Soon</div>;
     }
   };
 

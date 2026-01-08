@@ -4,7 +4,7 @@ import { SitemapItem, Session, Persona, NavigationTab } from './types';
 export const SITEMAP_DATA: SitemapItem[] = [
   {
     level1: 'Home',
-    purpose: 'Entry point and brand mission',
+    purpose: 'Primary entry point and brand mission',
     contentType: 'Page',
     status: 'Live',
     owner: 'Brand Marketing',
@@ -102,16 +102,16 @@ export const SITEMAP_DATA: SitemapItem[] = [
     status: 'Approved',
     owner: 'Travel & Logistics',
     subItems: [
-      { level2: 'Venue', level3: 'Venue', contentType: 'Page', status: 'Live' },
-      { level2: 'Venue', level3: 'Hotels', contentType: 'Collection', status: 'Approved' },
-      { level2: 'Venue', level3: 'Travel Info', contentType: 'Page', status: 'Live' },
-      { level2: 'Venue', level3: 'Local Guide', contentType: 'Page', status: 'Draft' },
-      { level2: 'Venue', level3: 'Accessibility', contentType: 'Page', status: 'Live' },
+      { level2: 'Venue & Travel', level3: 'Venue', contentType: 'Page', status: 'Live' },
+      { level2: 'Venue & Travel', level3: 'Hotels', contentType: 'Collection', status: 'Approved' },
+      { level2: 'Venue & Travel', level3: 'Travel Info', contentType: 'Page', status: 'Live' },
+      { level2: 'Venue & Travel', level3: 'Local Guide', contentType: 'Page', status: 'Draft' },
+      { level2: 'Venue & Travel', level3: 'Accessibility', contentType: 'Page', status: 'Live' },
     ]
   },
   {
     level1: 'About',
-    purpose: 'Conference governance and general info',
+    purpose: 'Governance & info',
     contentType: 'Pages',
     status: 'Live',
     owner: 'Public Relations',
@@ -119,8 +119,8 @@ export const SITEMAP_DATA: SitemapItem[] = [
       { level2: 'About', level3: 'About TC', contentType: 'Page', status: 'Live' },
       { level2: 'About', level3: 'FAQ', contentType: 'Page', status: 'Live' },
       { level2: 'About', level3: 'Contact', contentType: 'Page', status: 'Live' },
-      { level2: 'About', level3: 'Code of Conduct', contentType: 'Static', status: 'Live' },
-      { level2: 'About', level3: 'Convince Your Boss', contentType: 'Page', status: 'Approved' },
+      { level2: 'Governance', level3: 'Code of Conduct', contentType: 'Static', status: 'Live' },
+      { level2: 'Sales Enablement', level3: 'Convince Your Boss', contentType: 'Page', status: 'Approved' },
     ]
   },
   {
@@ -132,14 +132,14 @@ export const SITEMAP_DATA: SitemapItem[] = [
   },
   {
     level1: 'Register',
-    purpose: 'Conversion and ticketing',
+    purpose: 'Conversion (Tickets)',
     contentType: 'Transactional',
     status: 'Live',
     owner: 'Registration Systems',
   },
   {
     level1: 'Legal',
-    purpose: 'Compliance and data protection',
+    purpose: 'Compliance',
     contentType: 'Static',
     status: 'Live',
     owner: 'Legal Council',
@@ -211,10 +211,18 @@ export const MOCK_SESSIONS: Session[] = [
 ];
 
 export const TRACKS = [
-  'Visual Analytics', 'Business Intelligence', 'Data Storytelling',
-  'Tableau Prep & Modeling', 'Tableau Cloud & Server', 'Administration',
-  'Advanced Analytics', 'AI & Einstein', 'Embedded Analytics',
-  'Industry Solutions', 'Data Culture', 'Developer & Extensions'
+  'Visual Analytics', 
+  'Business Intelligence', 
+  'Data Storytelling',
+  'Tableau Prep & Modeling', 
+  'Tableau Cloud & Server', 
+  'Administration',
+  'Advanced Analytics', 
+  'AI & Einstein', 
+  'Embedded Analytics',
+  'Industry Solutions', 
+  'Data Culture', 
+  'Developer & Extensions'
 ];
 
 export const AUDIENCES: Persona[] = ['Analyst', 'Developer', 'Admin', 'Executive'];
@@ -236,7 +244,7 @@ export const PERSONA_CONFIG: Record<Persona, PersonaMetadata> = {
     description: 'Focus on uncovering insights and telling stories with data.',
     heroTitle: 'Master the Art of Visual Discovery',
     heroSubtitle: 'Deepen your analytical skills with sessions tailored for data storytellers and visualization experts.',
-    priorityTab: NavigationTab.SESSIONS,
+    priorityTab: NavigationTab.PROGRAM,
     highlightedModules: ['Program', 'Learn']
   },
   Developer: {
@@ -244,7 +252,7 @@ export const PERSONA_CONFIG: Record<Persona, PersonaMetadata> = {
     description: 'Build applications and extend the Tableau platform.',
     heroTitle: 'The Future of Extensible Analytics',
     heroSubtitle: 'Connect, extend, and embed. Dive deep into the Tableau API and developer ecosystem.',
-    priorityTab: NavigationTab.SESSIONS,
+    priorityTab: NavigationTab.PROGRAM,
     highlightedModules: ['Program', 'Community']
   },
   Admin: {
@@ -252,23 +260,23 @@ export const PERSONA_CONFIG: Record<Persona, PersonaMetadata> = {
     description: 'Manage deployments, security, and data governance.',
     heroTitle: 'Architecting Trust at Scale',
     heroSubtitle: 'Learn the latest in platform governance, security best practices, and enterprise deployments.',
-    priorityTab: NavigationTab.GOVERNANCE,
-    highlightedModules: ['Governance', 'Analytics']
+    priorityTab: NavigationTab.ABOUT,
+    highlightedModules: ['About', 'Legal']
   },
   Executive: {
     tracks: ['Business Intelligence', 'Data Culture', 'Industry Solutions'],
     description: 'Drive data-driven decision making across the enterprise.',
     heroTitle: 'Transforming Data into Strategy',
     heroSubtitle: 'Leadership-focused content on building data cultures and maximizing ROI on your analytics investment.',
-    priorityTab: NavigationTab.ANALYTICS,
-    highlightedModules: ['Analytics', 'Program']
+    priorityTab: NavigationTab.HOME,
+    highlightedModules: ['Home', 'Program']
   },
   General: {
     tracks: ['Visual Analytics', 'Data Culture'],
     description: 'Explore the full spectrum of the Tableau Conference.',
     heroTitle: 'The Biggest Data Event of the Year',
     heroSubtitle: 'The central hub for Tableau Conference planning, discoverability, and attendee experience.',
-    priorityTab: NavigationTab.OVERVIEW,
+    priorityTab: NavigationTab.HOME,
     highlightedModules: ['Home', 'Program']
   }
 };
